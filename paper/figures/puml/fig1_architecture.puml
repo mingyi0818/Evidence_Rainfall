@@ -1,0 +1,64 @@
+@startuml fig1_architecture
+skinparam dpi 300
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam ArrowColor #2C3E50
+skinparam ArrowThickness 1.5
+
+skinparam rectangle {
+  BackgroundColor #ECF0F1
+  BorderColor #2C3E50
+  BorderThickness 1.5
+}
+
+skinparam package {
+  BackgroundColor #F8F9FA
+  BorderColor #95A5A6
+  BorderStyle dashed
+  BorderThickness 1.0
+}
+
+rectangle "Input\nWeather Features (123-dim)" as INPUT #D5E8D4
+
+package "MLP Backbone" {
+  rectangle "Hidden Layer 1\n[128] + BatchNorm + ReLU + Dropout(0.3)" as H1 #DAE8FC
+  rectangle "Hidden Layer 2\n[64] + BatchNorm + ReLU + Dropout(0.3)" as H2 #DAE8FC
+  rectangle "Hidden Layer 3\n[32] + BatchNorm + ReLU + Dropout(0.3)" as H3 #DAE8FC
+}
+
+rectangle "Linear Layer + Softplus\nz_k = w_k^T h + b_k\ne_k = softplus(z_k)" as EVIDENCE #FFE6CC
+
+rectangle "Dirichlet Parameterization\na_k = e_k + a^0_k" as DIR #D5E8D4
+
+package "Prior a^0_k" {
+  rectangle "Uniform: a^0 = 1" as PRIOR_U #F5F5F5
+  rectangle "Climatology: a^0 = n_0 * pi_bar\n(n_0 = 10)" as PRIOR_C #F5F5F5
+}
+
+rectangle "Predictive Distribution\np_hat_k = a_k / S\nS = sum(a_j)" as PRED #FFE6CC
+
+package "Uncertainty Decomposition" {
+  rectangle "Total: H_T" as HT #F8CECC
+  rectangle "Aleatoric: H_A" as HA #F8CECC
+  rectangle "Epistemic: H_E = H_T - H_A" as HE #F8CECC
+}
+
+rectangle "Masked KL Regularizer\nL = L_risk + lambda_reg * L_KL" as LOSS #E1D5E7
+
+INPUT --> H1
+H1 --> H2
+H2 --> H3
+H3 --> EVIDENCE
+EVIDENCE --> DIR
+PRIOR_U --> DIR
+PRIOR_C --> DIR
+DIR --> PRED
+DIR --> HT
+DIR --> HA
+HA --> HE
+HT --> HE
+DIR --> LOSS
+
+@enduml

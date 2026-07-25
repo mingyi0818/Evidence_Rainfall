@@ -634,7 +634,7 @@ The Rain in Australia dataset is publicly available from Kaggle at https://www.k
 
 ## Code Availability
 
-The full source code, experimental scripts, and pre-trained checkpoints are available at https://github.com/mingyi0818/17_Evidence_Rainfall. The repository includes `data_loader.py` (temporal split with leakage-free preprocessing), `models.py` (EDL-Fixed with masked KL and C1 prior), `train.py` (multi-seed training), `ablation_sens_robust.py` (ablation/sensitivity/robustness experiments), `statistical_analysis_v2.py` (paired Wilcoxon tests with Holm--Bonferroni correction), and `aggregate_results.py` (5-seed aggregation).
+The full source code, experimental scripts, and pre-trained checkpoints are available at https://github.com/mingyi0818/Evidence_Rainfall. The repository includes `data_loader.py` (temporal split with leakage-free preprocessing), `models.py` (EDL-Fixed with masked KL and C1 prior), `train.py` (multi-seed training), `ablation_sens_robust.py` (ablation/sensitivity/robustness experiments), `statistical_analysis_v2.py` (paired Wilcoxon tests with Holm--Bonferroni correction), and `aggregate_results.py` (5-seed aggregation).
 
 ## Author Contributions (CRediT)
 

@@ -1,5 +1,7 @@
 # Diagnosing and Mitigating Epistemic Uncertainty Degeneracy in Binary Evidence Deep Learning
 
+**Repository**: https://github.com/mingyi0818/Evidence_Rainfall
+
 This repository contains the full source code, experimental data, and pre-trained checkpoints for the paper:
 
 > **Diagnosing and Mitigating Epistemic Uncertainty Degeneracy in Binary Evidence Deep Learning: A Case Study on Rainfall Occurrence Prediction**

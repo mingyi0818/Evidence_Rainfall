@@ -20,7 +20,7 @@ We believe this work is well-suited for Applied Intelligence because it addresse
 
 We emphasize that this paper does not claim to propose a new state-of-the-art rainfall predictor. Rather, it provides a diagnostic framework for evaluating whether EDL's uncertainty claims hold in a given application, and a practical mitigation strategy when they do not. All 350+ experimental numbers reported in the paper are traceable to released result files; the full source code, pre-trained checkpoints, and reproduction guide are available at:
 
-https://github.com/mingyi0818/17_Evidence_Rainfall
+https://github.com/mingyi0818/Evidence_Rainfall
 
 This work was supported by the Guangdong Provincial Undergraduate Higher Education Teaching Reform Project (Grant No. 粤教高函〔2024〕9-989). The authors declare no competing financial or non-financial interests. This manuscript has not been published elsewhere and is not under consideration by any other journal.
 
