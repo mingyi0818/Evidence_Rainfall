@@ -170,7 +170,7 @@ def make_loaders(X_train, y_train, X_val, y_val, X_test, y_test,
 
 def preprocess_and_split(seed=42, save=True, split_mode='temporal'):
     """
-    Full preprocessing pipeline (fixed per reviewer F6):
+    Full preprocessing pipeline (leakage-free):
       1. Load raw data
       2. Drop target-missing rows
       3. Drop high-missing columns (statistics on full data — leakage is negligible for column-drop)
@@ -213,7 +213,7 @@ def preprocess_and_split(seed=42, save=True, split_mode='temporal'):
     num_cols = [c for c in num_cols if c in df_features.columns]
     cat_cols = [c for c in cat_cols if c in df_features.columns]
 
-    # ===== SPLIT FIRST (Fix F6) =====
+    # ===== SPLIT FIRST (leakage-free) =====
     if split_mode == 'temporal':
         # S1: temporal split — 2007-2014 train / 2015 val / 2016-2017 test
         # Business-valid: no future leakage, measures time-extrapolation skill
@@ -256,7 +256,7 @@ def preprocess_and_split(seed=42, save=True, split_mode='temporal'):
     print(f"[DataLoader] Split mode: {split_mode}")
     print(f"[DataLoader] Splits -> Train: {len(df_train)}, Val: {len(df_val)}, Test: {len(df_test)}")
 
-    # ===== IMPUTE / ENCODE / SCALE ON TRAIN ONLY (Fix F6) =====
+    # ===== IMPUTE / ENCODE / SCALE ON TRAIN ONLY =====
     # Median imputation fit on train, transform val/test
     imputer_num = SimpleImputer(strategy='median')
     df_train[num_cols] = imputer_num.fit_transform(df_train[num_cols])

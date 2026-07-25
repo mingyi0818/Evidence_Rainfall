@@ -182,8 +182,8 @@ def predict_torch_model(model, X, batch_size=512):
                 logits = model(Xb)
                 probs = F.softmax(logits, dim=1).cpu().numpy()
                 preds = probs.argmax(axis=1)
-                # Fix F1: compute softmax-based uncertainty for plain classifiers
-                # (predictive entropy, MSP, margin — standard UQ baselines per Hendrycks & Gimpel 2017)
+                # softmax-based uncertainty for plain classifiers
+                # (predictive entropy, MSP, margin — Hendrycks & Gimpel 2017)
                 probs_t = torch.from_numpy(probs)
                 H_total = -(probs_t * torch.log(probs_t + 1e-10)).sum(dim=1).numpy()
                 all_unc['H_total'].append(H_total)

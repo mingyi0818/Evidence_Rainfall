@@ -29,17 +29,17 @@ from models import build_model, SklearnWrapper
 def edl_loss(alpha, y, lambda_reg=0.001, annealing_factor=1.0,
              loss_type='cross_entropy', alpha_prior=None):
     """
-    Evidence Deep Learning loss (fixed per reviewer F3).
-    alpha: (batch, num_classes) Dirichlet parameters
-    y: (batch,) integer labels
-    alpha_prior: (batch, num_classes) climatology-anchored prior (C1); None => uniform prior [1,1]
+    EDL loss: digamma CE + masked KL.
+    alpha: (batch, K) Dirichlet params
+    y: (batch,) labels
+    alpha_prior: (batch, K) prior for C1; None => uniform
     """
     K = alpha.size(1)
     alpha0 = alpha.sum(dim=1, keepdim=True)
     probs = alpha / alpha0
 
     if loss_type == 'cross_entropy':
-        # Bayes risk of cross-entropy: E_{p~Dir}[CE(p,y)] = psi(S) - psi(alpha_y)  (Sensoy Eq.5 digamma form)
+        # digamma form (Sensoy Eq.5)
         y_onehot = F.one_hot(y, num_classes=K).float()
         digamma_alpha0 = torch.digamma(alpha0)
         digamma_alpha = torch.digamma(alpha)
@@ -53,9 +53,8 @@ def edl_loss(alpha, y, lambda_reg=0.001, annealing_factor=1.0,
     else:
         raise ValueError(loss_type)
 
-    # Fix F3(d): masked KL regularization (Sensoy et al. correct implementation)
-    # alpha_tilde = y * alpha_prior + (1 - y) * alpha  (mask out true-class evidence)
-    # This ensures KL gradient on true-class evidence is exactly 0 (Theorem 3)
+    # masked KL: alpha_tilde = y * alpha_prior + (1-y) * alpha
+    # true-class evidence gets no KL gradient
     y_onehot = F.one_hot(y, num_classes=K).float()
     if alpha_prior is None:
         alpha_prior = torch.ones_like(alpha)
@@ -285,7 +284,7 @@ def train_torch_baseline(model_name, X_train, y_train, X_val, y_val, input_dim,
 
 def train_sklearn_baseline(model_name, X_train, y_train, seed=42, use_class_weight=False):
     """Train sklearn-based baselines: LR, RF, XGBoost.
-    Fix F4: class_weight is now optional (default False for fair comparison with EDL-UQ
+    class_weight is optional (default False for fair comparison with EDL-UQ
     which has no class weighting). Set use_class_weight=True to reproduce the original
     'handcuffed' baseline behavior."""
     from sklearn.linear_model import LogisticRegression

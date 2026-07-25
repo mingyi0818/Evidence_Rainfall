@@ -1,5 +1,5 @@
 """
-Statistical analysis for direction 17 (EDL-Rainfall) - addresses reviewer M8.
+Statistical analysis for direction 17 (EDL-Rainfall).
 
 Implements proper sample-level statistical tests:
 - McNemar exact test for accuracy comparisons (paired on test set)

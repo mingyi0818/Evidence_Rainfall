@@ -38,7 +38,7 @@ def run_ablation(X_train, y_train, X_val, y_val, X_test, y_test, input_dim):
     """Component-level ablation: Full / w/o KL / w/o Annealing / Softmax / MSE.
 
     All variants share the SAME backbone ([128,64,32] + BN + ReLU + Dropout 0.3)
-    to satisfy reviewer M14 (controlled backbone comparison).
+    for controlled comparison.
     """
     log("\n" + "="*60 + "\nABLATION STUDY (seed=42, temporal split)\n" + "="*60)
     rows = []
@@ -378,7 +378,7 @@ def run_robustness(X_train, y_train, X_val, y_val, X_test, y_test, input_dim):
     """Robustness analysis: Gaussian noise + feature missing.
 
     Also reports S (total evidence), H_epi (epistemic uncertainty), Unc-AUROC
-    to address reviewer M3 (must show uncertainty degradation under shift).
+    to show uncertainty degradation under shift.
     """
     log("\n" + "="*60 + "\nROBUSTNESS ANALYSIS (seed=42)\n" + "="*60)
     rows = []

@@ -167,7 +167,7 @@ def evaluate_model(model, X_test, y_test, model_type='edl'):
             else:  # plain softmax (LSTM/GRU)
                 logits = model(Xb)
                 probs = F.softmax(logits, dim=1).cpu().numpy()
-                # Fix F1: compute predictive entropy
+                # predictive entropy
                 probs_t = torch.from_numpy(probs)
                 H = -(probs_t * torch.log(probs_t + 1e-10)).sum(dim=1).numpy()
             preds = probs.argmax(axis=1)

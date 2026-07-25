@@ -1,5 +1,5 @@
 """
-Statistical analysis v2 for direction 17 (EDL-Rainfall) - addresses reviewer M8.
+Statistical analysis v2 for direction 17 (EDL-Rainfall).
 
 Uses ALREADY-TRAINED 5-seed aggregated results in results/fixed_results_temporal_all.json.
 Implements:

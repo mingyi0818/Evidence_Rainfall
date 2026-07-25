@@ -18,7 +18,7 @@ Our manuscript addresses this gap with the following contributions:
 
 We believe this work is well-suited for Applied Intelligence because it addresses the journal's focus on "intelligent systems methodology and its application in solving real-world complex problems"—specifically, providing an intelligent diagnostic framework for uncertainty quantification in operational meteorology. The binary classification setting is the simplest case where the degeneracy is analytically tractable, and the diagnostic criterion is directly transferable to other binary EDL applications.
 
-We emphasize that this paper does not claim to propose a new state-of-the-art rainfall predictor. Rather, it provides a diagnostic framework for evaluating whether EDL's uncertainty claims hold in a given application, and a practical mitigation strategy when they do not. All 350+ experimental numbers reported in the paper are traceable to released result files; the full source code, pre-trained checkpoints, and reproduction guide are available at:
+We emphasize that this paper does not claim to propose a new state-of-the-art rainfall predictor. Rather, it provides a diagnostic framework for evaluating whether EDL's uncertainty claims hold in a given application, and a practical mitigation strategy when they do not. All experimental results can be reproduced from the released code and data; the full source code, pre-trained checkpoints, and reproduction guide are available at:
 
 https://github.com/mingyi0818/Evidence_Rainfall
 

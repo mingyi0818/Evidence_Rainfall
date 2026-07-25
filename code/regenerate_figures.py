@@ -112,13 +112,16 @@ def fig4_sensitivity():
     print("[Fig 4] Sensitivity analysis")
     csv_path = os.path.join(RES, 'sensitivity_summary_v2.csv')
     json_path = os.path.join(RES, 'sensitivity_results.json')
-    if os.path.exists(csv_path):
-        df = pd.read_csv(csv_path)
-        params = df['parameter'].tolist()
-    elif os.path.exists(json_path):
+    if os.path.exists(json_path):
         with open(json_path) as f:
             sdata = json.load(f)
-        params = list(sdata.keys())
+        # data is nested under 'raw' key
+        raw = sdata.get('raw', sdata)
+        params = list(raw.keys())
+    elif os.path.exists(csv_path):
+        df = pd.read_csv(csv_path)
+        params = df['parameter'].unique().tolist()
+        raw = None
     else:
         print("  No sensitivity data, skip"); return
 
@@ -126,19 +129,19 @@ def fig4_sensitivity():
     if len(params) == 1:
         axes = [axes]
     for ax, pname in zip(axes, params):
-        if os.path.exists(json_path):
-            with open(json_path) as f:
-                sdata = json.load(f)
-            pdict = sdata.get(pname, {})
-            vals, f1s = [], []
-            for k, v in sorted(pdict.items(), key=lambda x: float(x[0]) if str(x[0]).replace('.','',1).isdigit() else 0):
-                vals.append(k)
-                f1s.append(v.get('f1_macro_mean', v.get('mean', 0)))
-            ax.plot(range(len(vals)), f1s, marker='o', color='darkgreen', linewidth=2, markersize=6)
-            ax.set_xticks(range(len(vals)))
+        if raw is not None:
+            pdict = raw.get(pname, {})
+            # Sort by numeric value of parameter
+            sorted_items = sorted(pdict.items(),
+                                  key=lambda x: float(x[0]) if str(x[0]).replace('.','',1).isdigit() else 0)
+            vals = [float(k) for k, _ in sorted_items]
+            f1s = [v.get('f1_macro', v.get('f1_macro_mean', 0)) for _, v in sorted_items]
+            ax.plot(vals, f1s, marker='o', color='darkgreen', linewidth=2, markersize=6)
+            ax.set_xticks(vals)
             ax.set_xticklabels([str(v) for v in vals], rotation=30, ha='right', fontsize=8)
         else:
-            ax.text(0.5, 0.5, pname, ha='center', va='center')
+            sub = df[df['parameter'] == pname].sort_values('value')
+            ax.plot(sub['value'], sub['f1_macro'], marker='o', color='darkgreen', linewidth=2, markersize=6)
         ax.set_xlabel(pname)
         ax.set_ylabel('F1-Macro')
         ax.grid(linestyle='--', alpha=0.5)
