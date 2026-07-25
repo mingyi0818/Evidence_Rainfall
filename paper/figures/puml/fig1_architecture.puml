@@ -28,24 +28,24 @@ package "MLP Backbone" {
   rectangle "Hidden Layer 3\n[32] + BatchNorm + ReLU + Dropout(0.3)" as H3 #DAE8FC
 }
 
-rectangle "Linear Layer + Softplus\nz_k = w_k^T h + b_k\ne_k = softplus(z_k)" as EVIDENCE #FFE6CC
+rectangle "Linear Layer + Softplus\nProduces non-negative evidence" as EVIDENCE #FFE6CC
 
-rectangle "Dirichlet Parameterization\na_k = e_k + a^0_k" as DIR #D5E8D4
+rectangle "Dirichlet Parameterization\nCombines evidence with prior" as DIR #D5E8D4
 
-package "Prior a^0_k" {
-  rectangle "Uniform: a^0 = 1" as PRIOR_U #F5F5F5
-  rectangle "Climatology: a^0 = n_0 * pi_bar\n(n_0 = 10)" as PRIOR_C #F5F5F5
+package "Prior Options" {
+  rectangle "Uniform prior" as PRIOR_U #F5F5F5
+  rectangle "Climatology-anchored prior" as PRIOR_C #F5F5F5
 }
 
-rectangle "Predictive Distribution\np_hat_k = a_k / S\nS = sum(a_j)" as PRED #FFE6CC
+rectangle "Predictive Distribution\nClass probabilities from Dirichlet" as PRED #FFE6CC
 
 package "Uncertainty Decomposition" {
-  rectangle "Total: H_T" as HT #F8CECC
-  rectangle "Aleatoric: H_A" as HA #F8CECC
-  rectangle "Epistemic: H_E = H_T - H_A" as HE #F8CECC
+  rectangle "Total uncertainty" as HT #F8CECC
+  rectangle "Aleatoric uncertainty" as HA #F8CECC
+  rectangle "Epistemic uncertainty" as HE #F8CECC
 }
 
-rectangle "Masked KL Regularizer\nL = L_risk + lambda_reg * L_KL" as LOSS #E1D5E7
+rectangle "Masked KL Regularizer\nTraining loss with annealing" as LOSS #E1D5E7
 
 INPUT --> H1
 H1 --> H2
