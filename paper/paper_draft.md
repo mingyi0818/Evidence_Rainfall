@@ -343,11 +343,11 @@ All three parameters show **low sensitivity** (elasticity < 0.2), with F1-Macro 
 
 ### 3.7 Robustness Analysis
 
-We evaluate robustness to (1) additive Gaussian noise (std = 0.01--0.15 of feature std) and (2) random feature missing (5%--30% of features zeroed). Table 4 and Figure 6 report both standard metrics and, critically, **total evidence $S$, epistemic uncertainty $H_E$, and Unc-AUROC** under perturbation.
+We evaluate robustness to (1) additive Gaussian noise (std = 0.01--0.15 of feature std) and (2) random feature missing (5%--30% of features zeroed). Table 4 and Figure 5 report both standard metrics and, critically, **total evidence $S$, epistemic uncertainty $H_E$, and Unc-AUROC** under perturbation.
 
-![Figure 6](figures/fig6_robustness.png)
+![Figure 5](figures/fig5_robustness.png)
 
-**Figure 6.** Robustness analysis (seed 42, temporal split). Left axis: accuracy and F1-Macro as functions of perturbation level. Right axis: total evidence $S$ and Unc-AUROC. Under 30% feature deletion (6.1-point accuracy drop), $S$ decreases by only 3.5% and Unc-AUROC degrades by 7.9%, confirming Theorem 3's prediction that binary EDL's epistemic component does not meaningfully respond to distribution shift.
+**Figure 5.** Robustness analysis (seed 42, temporal split). Left axis: accuracy and F1-Macro as functions of perturbation level. Right axis: total evidence $S$ and Unc-AUROC. Under 30% feature deletion (6.1-point accuracy drop), $S$ decreases by only 3.5% and Unc-AUROC degrades by 7.9%, confirming Theorem 3's prediction that binary EDL's epistemic component does not meaningfully respond to distribution shift.
 
 **Table 4.** Robustness analysis (seed 42, temporal split). $S$ is mean total evidence; $H_E$ is mean epistemic uncertainty; Unc-AUROC is uncertainty-based error detection.
 
@@ -373,11 +373,11 @@ This is direct empirical confirmation of Theorem 3: when the input distribution 
 
 ### 3.8 Uncertainty Analysis and Selective Prediction
 
-We analyze the uncertainty estimates on the test set (seed 42, $n=25{,}974$). Figure 5 visualizes the uncertainty distributions for correct vs. incorrect predictions and the selective-prediction curve.
+We analyze the uncertainty estimates on the test set (seed 42, $n=25{,}974$). Figure 6 visualizes the uncertainty for correct vs. incorrect predictions and the selective-prediction curve.
 
-![Figure 5](figures/fig5_uncertainty.png)
+![Figure 6](figures/fig6_uncertainty.png)
 
-**Figure 5.** Uncertainty analysis (seed 42, temporal split, test set $n=25{,}974$). Panel (a): Distributions of total uncertainty $H_T$ for correct vs. incorrect predictions; incorrect predictions have substantially higher $H_T$ (mean 0.5342 vs. 0.3012). Panel (b): Selective-prediction curve showing retained accuracy as a function of rejection rate, with random-rejection (lower bound) and oracle (upper bound) references. At 20% rejection, retained accuracy reaches 0.9150.
+**Figure 6.** Uncertainty analysis (seed 42, temporal split, test set $n=25{,}974$). Panel (a): Total uncertainty $H_T$ for correct vs. incorrect predictions; incorrect predictions have substantially higher $H_T$ (mean 0.5342 vs. 0.3012). Panel (b): Selective-prediction curve showing retained accuracy as a function of rejection rate, with random-rejection (lower bound) and oracle (upper bound) references. At 20% rejection, retained accuracy reaches 0.9150.
 
 **Table 5.** Uncertainty decomposition by prediction correctness (seed 42, temporal split).
 

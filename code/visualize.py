@@ -82,7 +82,6 @@ def draw_architecture_diagram(save_path):
     ax.annotate('', xy=(5.8, 1.2), xytext=(5.8, 2.2),
                 arrowprops=dict(arrowstyle='->', color='gray', lw=1.0, linestyle='--'))
 
-    ax.set_title('Figure 1: EDL-UQ Model Architecture', fontweight='bold', fontsize=13)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
@@ -134,7 +133,6 @@ def draw_comparison_plot(results_json_path, save_path):
             bars[best_idx].set_edgecolor('black')
             bars[best_idx].set_linewidth(2.0)
 
-    plt.suptitle('Figure 2: Performance Comparison Across Methods', fontweight='bold', fontsize=13, y=1.02)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
@@ -185,7 +183,6 @@ def draw_ablation_plot(ablation_json_path, save_path):
             bars[best_idx].set_edgecolor('black')
             bars[best_idx].set_linewidth(2.0)
 
-    plt.suptitle('Figure 3: Ablation Study Results', fontweight='bold', fontsize=13, y=1.02)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
@@ -227,7 +224,6 @@ def draw_sensitivity_plot(sensitivity_json_path, save_path):
         ax.set_title(f'Sensitivity: {param_name}', fontweight='bold')
         ax.grid(linestyle='--', alpha=0.5)
 
-    plt.suptitle('Figure 4: Parameter Sensitivity Analysis', fontweight='bold', fontsize=13, y=1.02)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
@@ -289,7 +285,6 @@ def draw_uncertainty_decomposition(results_json_path, save_path):
         ax.legend()
         ax.grid(axis='y', linestyle='--', alpha=0.5)
 
-    plt.suptitle('Figure 5: Uncertainty Decomposition (EDL-UQ)', fontweight='bold', fontsize=13, y=1.02)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
@@ -353,7 +348,6 @@ def draw_reliability_diagram(results_json_path, save_path):
 
     ax.set_xlabel('Mean Predicted Confidence')
     ax.set_ylabel('Fraction of Positives')
-    ax.set_title('Figure 6: Reliability Diagram', fontweight='bold')
     ax.legend(loc='upper left', fontsize=9)
     ax.set_xlim([0, 1])
     ax.set_ylim([0, 1])
@@ -393,7 +387,6 @@ def draw_tsne_plot(save_path):
     scatter = ax.scatter(emb[:, 0], emb[:, 1], c=y_sub, cmap='coolwarm', alpha=0.6, s=15, edgecolors='none')
     ax.set_xlabel('t-SNE 1')
     ax.set_ylabel('t-SNE 2')
-    ax.set_title('Figure 7: Feature Space Visualization (t-SNE)', fontweight='bold')
     cbar = plt.colorbar(scatter, ax=ax)
     cbar.set_label('RainTomorrow')
     cbar.set_ticks([0, 1])
