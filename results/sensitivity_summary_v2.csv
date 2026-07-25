@@ -1,0 +1,4 @@
+parameter,range,best_value_val,best_test_f1_macro,elasticity,sensitivity_level
+lambda_reg,"[0.0, 0.1]",0.01,0.7732162190479517,0.000913,Low
+dropout,"[0.0, 0.5]",0.0,0.773864675618882,0.002355,Low
+learning_rate,"[0.0001, 0.01]",0.01,0.7741889275324125,0.003492,Low

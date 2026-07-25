@@ -1,0 +1,62 @@
+{
+  "n_test": 21329,
+  "n_correct": 18436,
+  "n_errors": 2893,
+  "H_total": {
+    "mean": 0.3170294165611267,
+    "std": 0.2179519087076187,
+    "median": 0.27268362045288086,
+    "correct_mean": 0.28306931257247925,
+    "error_mean": 0.5334444046020508
+  },
+  "H_alea": {
+    "mean": 0.3121899962425232,
+    "std": 0.21695780754089355,
+    "median": 0.2677774131298065
+  },
+  "H_epi": {
+    "mean": 0.004839422646909952,
+    "std": 0.001152391778305173,
+    "median": 0.004779532551765442
+  },
+  "precision": {
+    "mean": 104.01209259033203,
+    "std": 22.2338809967041
+  },
+  "error_detection": {
+    "uncertainty_auroc": 0.819768514494365,
+    "uncertainty_aupr": 0.379729417179646
+  },
+  "rejection_rate_analysis": [
+    {
+      "rejection_rate": 0.05,
+      "n_retained": 20263,
+      "accuracy_retained": 0.8818042737995361
+    },
+    {
+      "rejection_rate": 0.1,
+      "n_retained": 19197,
+      "accuracy_retained": 0.8988904516330677
+    },
+    {
+      "rejection_rate": 0.15,
+      "n_retained": 18130,
+      "accuracy_retained": 0.9116933259790403
+    },
+    {
+      "rejection_rate": 0.2,
+      "n_retained": 17064,
+      "accuracy_retained": 0.9238162212845757
+    },
+    {
+      "rejection_rate": 0.25,
+      "n_retained": 15997,
+      "accuracy_retained": 0.9350503219353629
+    },
+    {
+      "rejection_rate": 0.3,
+      "n_retained": 14931,
+      "accuracy_retained": 0.9463532248342374
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+[16:01:50] ============================================================
+[16:01:50] CAE-Net Training (C2 + C3 + C4)
+[16:01:50] ============================================================
+[16:01:50] 
+[1/5] Loading data (temporal split)...
+[16:01:51]   Train=98988 Val=17231 Test=25974 dim=123
+[16:01:51] 
+[2/5] Computing C2 neighborhood labels...
+[16:01:52]   Computing C2 neighborhood labels (spatial neighbors)...
+[16:01:54]   Train: k mean=1.06, m mean=4.66
+[16:01:54]   Val:   k mean=1.01, m mean=4.77
+[16:01:54]   Test:  k mean=1.12, m mean=4.91
+[16:01:54]   Built metadata for 25974 test samples
+[16:01:54] 
+[3/5] Training CAE-Net (C2+C3)...
+[16:01:59]   Epoch 1/80 | train_loss=0.5368 val_loss=0.4253 val_acc=0.8550 val_S=7.6 af=0.000 c2w=0.00
+[16:02:09]   Epoch 6/80 | train_loss=0.3520 val_loss=0.3434 val_acc=0.8626 val_S=26.8 af=0.100 c2w=0.00
+[16:02:18]   Epoch 10/80 | train_loss=0.3694 val_loss=0.3333 val_acc=0.8650 val_S=36.9 af=0.180 c2w=0.40
+[16:02:40]   Epoch 20/80 | train_loss=0.4058 val_loss=0.3361 val_acc=0.8646 val_S=37.6 af=0.380 c2w=1.00
+[16:03:01]   Epoch 30/80 | train_loss=0.3948 val_loss=0.3377 val_acc=0.8639 val_S=38.5 af=0.580 c2w=1.00
+[16:03:20]   Early stopping at epoch 39
+[16:03:20]   CAE-Net training done in 85.4s
+[16:03:20] 
+[4/5] Training ablation: C3 only (no C2)...
+[16:03:22]   Epoch 1/80 | train_loss=0.5368 val_loss=0.4253 val_acc=0.8550 val_S=7.6 af=0.000 c2w=0.00
+[16:03:32]   Epoch 6/80 | train_loss=0.3520 val_loss=0.3434 val_acc=0.8626 val_S=26.8 af=0.100 c2w=0.00
+[16:03:40]   Epoch 10/80 | train_loss=0.3338 val_loss=0.3318 val_acc=0.8650 val_S=40.8 af=0.180 c2w=0.00
+[16:04:00]   Epoch 20/80 | train_loss=0.3145 val_loss=0.3262 val_acc=0.8653 val_S=76.1 af=0.380 c2w=0.00
+[16:04:20]   Epoch 30/80 | train_loss=0.3052 val_loss=0.3283 val_acc=0.8627 val_S=91.8 af=0.580 c2w=0.00
+[16:04:34]   Early stopping at epoch 37
+[16:04:34]   C3-only training done in 74.6s
+[16:04:34] 
+[5/5] Evaluating models...
+[16:04:34]   CAE-Net (C2+C3+C4): acc=0.8560 f1=0.7690 ece=0.0261 S=40.9 H_E=0.012428
+[16:04:34]   C4: coverage=0.9499 (target>=0.95) abstain=0.2789 sel_acc=0.9305
+[16:04:34]   C3-only:            acc=0.8548 f1=0.7674 ece=0.0120 S=86.8 H_E=0.005595
+[16:04:34] 
+  Loading EDL-Fixed (baseline) for comparison...
+[16:04:34]   EDL-Fixed:          acc=0.8697 f1=0.7930 ece=0.0176 S=102.0 H_E=0.004926
+[16:04:34] 
+Results saved to D:\ResearchPaperPrepare\17_Evidence_Rainfall\code\..\results\cae_net_results.json
+[16:04:34] CAE-Net checkpoint saved to D:\ResearchPaperPrepare\17_Evidence_Rainfall\code\..\checkpoints\cae_net_seed42.pth
+[16:04:34] 
+============================================================
+[16:04:34] CAE-Net TRAINING COMPLETE
+[16:04:34] ============================================================

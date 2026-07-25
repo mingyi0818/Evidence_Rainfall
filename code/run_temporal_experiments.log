@@ -1,0 +1,84 @@
+Device: cuda
+PyTorch: 2.12.0+cu132
+Train=98988 Val=17231 Test=25974 dim=119
+Train rain=0.2251 Test rain=0.2289
+
+>>> Starting sensitivity analysis...
+
+============================================================
+SENSITIVITY ANALYSIS (seed=42, temporal split, val tuning)
+============================================================
+
+[S1] lambda_reg sensitivity
+  lam=0.0: val_f1=0.7661 test_f1=0.7742
+  lam=0.001: val_f1=0.7672 test_f1=0.7720
+  lam=0.01: val_f1=0.7699 test_f1=0.7732
+  lam=0.1: val_f1=0.7693 test_f1=0.7717
+
+[S2] dropout sensitivity
+  dropout=0.0: val_f1=0.7686 test_f1=0.7739
+  dropout=0.2: val_f1=0.7670 test_f1=0.7753
+  dropout=0.3: val_f1=0.7672 test_f1=0.7720
+  dropout=0.4: val_f1=0.7683 test_f1=0.7731
+  dropout=0.5: val_f1=0.7661 test_f1=0.7742
+
+[S3] learning rate sensitivity
+  lr=0.0001: val_f1=0.7587 test_f1=0.7667
+  lr=0.0005: val_f1=0.7700 test_f1=0.7748
+  lr=0.001: val_f1=0.7672 test_f1=0.7720
+  lr=0.005: val_f1=0.7711 test_f1=0.7735
+  lr=0.01: val_f1=0.7730 test_f1=0.7742
+
+[Elasticity Summary]
+  lambda_reg: range=[0.0,0.1] best_val=0.01 best_test_f1=0.7732 elasticity=0.000913 (Low)
+  dropout: range=[0.0,0.5] best_val=0.0 best_test_f1=0.7739 elasticity=0.002355 (Low)
+  learning_rate: range=[0.0001,0.01] best_val=0.01 best_test_f1=0.7742 elasticity=0.003492 (Low)
+
+Sensitivity results saved to results/sensitivity_results_v2.csv and sensitivity_summary_v2.csv
+>>> Sensitivity done in 626.8s
+
+>>> Starting robustness analysis...
+
+============================================================
+ROBUSTNESS ANALYSIS (seed=42, temporal split)
+============================================================
+
+  Clean: acc=0.8546 f1=0.7720 ece=0.0098 S=69.82 H_E=0.006985 unc_auroc=0.8094
+  Noise 1%: acc=0.8546 f1=0.7720 ece=0.0091 S=69.82 H_E=0.006985 unc_auroc=0.8094
+  Noise 5%: acc=0.8546 f1=0.7720 ece=0.0103 S=69.84 H_E=0.006985 unc_auroc=0.8071
+  Noise 10%: acc=0.8546 f1=0.7720 ece=0.0094 S=69.84 H_E=0.006986 unc_auroc=0.8030
+  Noise 15%: acc=0.8546 f1=0.7720 ece=0.0093 S=69.85 H_E=0.006993 unc_auroc=0.7941
+  Missing 5%: acc=0.8546 f1=0.7720 ece=0.0126 S=69.41 H_E=0.007041 unc_auroc=0.7845
+  Missing 10%: acc=0.8546 f1=0.7720 ece=0.0178 S=69.01 H_E=0.007098 unc_auroc=0.7636
+  Missing 20%: acc=0.8546 f1=0.7720 ece=0.0338 S=68.21 H_E=0.007200 unc_auroc=0.7233
+  Missing 30%: acc=0.8546 f1=0.7720 ece=0.0491 S=67.41 H_E=0.007311 unc_auroc=0.6879
+
+Robustness results saved to results/robustness_results_v2.csv
+>>> Robustness done in 42.1s
+
+>>> Starting uncertainty analysis + selective prediction...
+
+============================================================
+UNCERTAINTY ANALYSIS (seed=42, temporal split)
+============================================================
+  Reject 0%: retain=25974 acc=0.8546 random=0.8546 oracle=0.8546
+  Reject 5%: retain=24676 acc=0.8731 random=0.8546 oracle=0.8996
+  Reject 10%: retain=23377 acc=0.8892 random=0.8546 oracle=0.9496
+  Reject 15%: retain=22078 acc=0.9024 random=0.8546 oracle=1.0000
+  Reject 20%: retain=20780 acc=0.9150 random=0.8546 oracle=1.0000
+  Reject 25%: retain=19481 acc=0.9271 random=0.8546 oracle=1.0000
+  Reject 30%: retain=18182 acc=0.9369 random=0.8546 oracle=1.0000
+
+Uncertainty analysis saved to results/uncertainty_analysis_v2.json
+  n_test=25974 n_correct=22198 n_errors=3776
+  H_T: correct=0.3012 error=0.5342
+  H_A: correct=0.2944 error=0.5261
+  H_E: correct=0.006805 error=0.008041
+  S:   correct=71.09 error=62.33
+  Unc-AUROC=0.8094
+>>> Uncertainty analysis done in 49.9s
+
+============================================================
+ALL TEMPORAL-SPLIT EXPERIMENTS COMPLETE
+Total time: 720.2s
+============================================================
